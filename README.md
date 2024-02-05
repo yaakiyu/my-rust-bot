@@ -1,7 +1,7 @@
-# bot-template
-Rust poise template repository
+# rust bot
+Rustで作ったbotのあれこれ
 
-## Enviroment variable
+## .envに書く内容
 - `DISCORD_TOKEN` - Discord bot token
 - `DATABASE_URL` - Database url
 

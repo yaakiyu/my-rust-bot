@@ -16,6 +16,6 @@ pub async fn say(
     ctx: utils::Context<'_>,
     #[description = "言いたいこと"] text: String,
 ) -> utils::CommandResult {
-    ctx.say(text.to_string()).await?;
+    ctx.say(text).await?;
     Ok(())
 }
