@@ -12,6 +12,10 @@ async fn main() -> anyhow::Result<()> {
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
             commands: vec![commands::ping(), commands::introduction(), commands::say()],
+            prefix_options: poise::PrefixFrameworkOptions {
+                prefix: Some("rust.".to_string()),
+                ..Default::default()
+            },
             ..Default::default()
         })
         .setup(|ctx, _ready, framework| {
