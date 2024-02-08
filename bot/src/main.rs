@@ -2,6 +2,7 @@ use poise::serenity_prelude as serenity;
 
 mod commands;
 mod utils;
+mod events;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -15,6 +16,9 @@ async fn main() -> anyhow::Result<()> {
             prefix_options: poise::PrefixFrameworkOptions {
                 prefix: Some("rust.".to_string()),
                 ..Default::default()
+            },
+            event_handler: |ctx, event, framework, data| {
+                Box::pin(events::event_handler(ctx, event, framework, data))
             },
             ..Default::default()
         })

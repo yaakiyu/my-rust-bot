@@ -27,3 +27,9 @@ use ファイル名::関数名;
             commands: vec![commands::ping(), commands::introduction(), commands::say(), commands::関数名()],
 ```
 みたいに追加すればOK
+
+# 以下、rustのお勉強
+## 型
+- `i32` - 32bit整数
+- `String` - 文字列
+  - `format!("aaa {}", 5)` - `"aaa 5"`になる
