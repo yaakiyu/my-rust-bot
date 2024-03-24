@@ -1,4 +1,0 @@
-CREATE TABLE IF NOT EXISTS leveling (
-    user_id BIGINT NOT NULL PRIMARY KEY,
-    exp BIGINT NOT NULL
-);
