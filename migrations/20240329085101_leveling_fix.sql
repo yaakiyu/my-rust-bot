@@ -1,0 +1,1 @@
+ALTER TABLE leveling RENAME COLUMN exp to exp2;

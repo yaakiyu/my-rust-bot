@@ -1,24 +1,22 @@
 use sqlx::PgPool;
 
-pub async fn set_level(
+pub async fn update_level(
     pool: &PgPool,
-    user_id: i64,
-    exp: i64,
+    user_id: i64
 ) -> anyhow::Result<()> {
     sqlx::query!(
         r#"
-        INSERT INTO leveling (user_id, exp) VALUES ($1, $2)
-        ON CONFLICT (user_id) DO UPDATE SET exp = $2
+        INSERT INTO leveling (user_id, exp) VALUES ($1, 0)
+        ON CONFLICT (user_id) DO UPDATE SET exp = leveling.exp + 1
         "#,
-        user_id,
-        exp
+        user_id
     )
     .execute(pool)
     .await?;
     Ok(())
 }
 
-pub async fn get_level(pool: &PgPool, user_id: i64) -> anyhow::Result<Option<i64>> {
+pub async fn get_level(pool: &PgPool, user_id: i64) -> anyhow::Result<i64> {
     let row = sqlx::query!(
         r#"
         SELECT exp FROM leveling WHERE user_id = $1
@@ -27,5 +25,8 @@ pub async fn get_level(pool: &PgPool, user_id: i64) -> anyhow::Result<Option<i64
     )
     .fetch_optional(pool)
     .await?;
-    Ok(row.map(|row| row.exp))
+    if let Some(row) = row {
+        return Ok(row.exp)
+    }
+    Ok(0)
 }
